@@ -75,6 +75,8 @@ extension HomeVC: UITableViewDelegate {
         
         objDetailsVC?.postModel = postList[indexPath.row]
         
+        
+        
         self.navigationController?.pushViewController(objDetailsVC!, animated: true)
         
     }
