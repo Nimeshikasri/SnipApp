@@ -10,17 +10,18 @@ import UIKit
 class HomeVC: UIViewController {
     
     var postList:[PostModel?] = []
+    
+    var viewModel: HomeVM?
 
     @IBOutlet weak var objTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        viewModel = HomeVM()
     
-        let objNetworking = NetWorking()
         
-        objNetworking.getPostFromServer(serverUrl: Server.kPost.rawValue) { objModel in
+        viewModel?.getPost() { objModel in
             self.postList = objModel
             
             DispatchQueue.main.async {
@@ -55,7 +56,7 @@ extension HomeVC: UITableViewDataSource {
         
         let post = postList[indexPath.row]
         
-        objPostCell?.setData(post: post)
+        objPostCell?.setData(row: indexPath.row, viewModel: viewModel)
         return objPostCell!
     }
     
